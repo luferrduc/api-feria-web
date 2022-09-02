@@ -1,12 +1,12 @@
-import mysql from 'mysql2'
+import { createPool } from "mysql2/promise";
 
-const mysqlConnection = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "root",
-    database: "maipogrande",
-  });
-  
+export const pool = createPool({
+  host: "localhost",
+  user: "root",
+  password: "root",
+  database: "maipogrande",
+});
+/* 
   mysqlConnection.connect(function (err) {
     if (err) {
       console.log(err);
@@ -17,4 +17,4 @@ const mysqlConnection = mysql.createConnection({
   });
   
   module.exports = mysqlConnection;
-  
+   */

@@ -5,6 +5,9 @@ const router = Router();
 
 // PRODUCTORES
 
+router.get("/usuarios/" , (req,res) => {
+    res.send('Hola Mundo')
+})
 
 // CLIENTES EXTERNOS
 
