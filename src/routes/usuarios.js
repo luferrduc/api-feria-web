@@ -1,17 +1,23 @@
 import { Router } from "express";
-
-const usuariosController = require("../controllers/usuariosControllersuariosController");
-
+//import { getAllUsuario } from "../controllers/usuariosController";
+//const usuariosController = require("../controllers/usuariosControllersuariosController");
 const router = Router();
 
-// PRODUCTORES
+router.get("/usuarios/", (req, res) => {
+  //const allUsers = usuarioService.getAllUsuario;
+  req.getConnection((err, conn) => {
+    if (err) return res.send(err);
+    conn.query("SELECT * FROM usuarios", (err, rows) => {
+      if (err) return res.send(err);
 
-router
-  .get("/usuarios/", usuariosController.getAllUsuario)
-  .get("/usuarios/id", usuariosController.getOneUsuario)
+      res.json(rows);
+    });
+  });
+});
+/*.get("/usuarios/id", usuariosController.getOneUsuario)
   .post("/usuarios/id", usuariosController.createNewUsuario)
   .put("/usuarios/id", usuariosController.updateUsuario)
-  .delete("/usuarios/id", usuariosController.deleteOneUsuario);
+  .delete("/usuarios/id", usuariosController.deleteOneUsuario);*/
 
 // CLIENTES EXTERNOS
 
