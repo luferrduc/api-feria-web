@@ -4,9 +4,10 @@ import { dirname, join } from "path";
 // Da rutas de un archivo del directorio
 import { fileURLToPath } from "url";
 import { dbOptions } from "./database.js";
-import UserRoutes from "./routes/usuarios.js";
-import mysql from "mysql"
-import myconn from "express-myconnection"
+import UserRoutes from "./routes/users.js";
+//para conectarlo a la base de datos
+import mysql from "mysql";
+import myconn from "express-myconnection";
 
 // Inicialización
 const app = express();
@@ -19,7 +20,7 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use(myconn(mysql, dbOptions, 'single')); //conexion base de datos
+app.use(myconn(mysql, dbOptions, "single")); //conexion base de datos
 
 // Rutas
 app.use(UserRoutes);

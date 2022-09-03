@@ -1,15 +1,15 @@
-const getAllUsuario = () => {
+const getAllUsers = () => {
   return;
 };
-const getOneUsuario = () => {
+const getOneUsers = () => {
   return;
 };
-const createNewUsuario = () => {
+const createNewUser = () => {
   return;
 };
-const updateUsuario = () => {
+const updateUser = () => {
   return;
 };
-const deleteOneUsuario = () => {
+const deleteOneUser = () => {
   return;
 };

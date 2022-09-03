@@ -1,19 +1,17 @@
 //const usuarioService = require("../services/usuarioService");
 
-export const getAllUsuario = (req, res) => {
+export const getAllUsers = (req, res) => {
   //const allUsers = usuarioService.getAllUsuario;
   req.getConnection((err, conn) => {
     if (err) return res.send(err);
     conn.query("SELECT * FROM usuarios", (err, rows) => {
       if (err) return res.send(err);
-
       res.json(rows);
     });
   });
 };
-export const getOneUsuario = (req, res) => { //trae el usuario segun su id
+export const getOneUser = (req, res) => { //trae el usuario segun su id
   //const user = usuarioService.getOneUsuario(req.params.userId);
-  //res.send("Get one user");
   req.getConnection((err, conn) => {
     if (err) return res.send(err);
     conn.query(
@@ -21,7 +19,6 @@ export const getOneUsuario = (req, res) => { //trae el usuario segun su id
       [req.params.id],
       (err, rows) => {
         if (err) return res.send(err);
-
         res.json(rows);
       }
     );
