@@ -4,20 +4,30 @@ export const getAllUsuario = (req, res) => {
   //const allUsers = usuarioService.getAllUsuario;
   req.getConnection((err, conn) => {
     if (err) return res.send(err);
-
     conn.query("SELECT * FROM usuarios", (err, rows) => {
       if (err) return res.send(err);
 
       res.json(rows);
     });
   });
-  //res.send("Get all users");
 };
-/* const getOneUsuario = (req, res) => {
-  const user = usuarioService.getOneUsuario(req.params.userId);
-  res.send("Get one user");
-};
+export const getOneUsuario = (req, res) => { //trae el usuario segun su id
+  //const user = usuarioService.getOneUsuario(req.params.userId);
+  //res.send("Get one user");
+  req.getConnection((err, conn) => {
+    if (err) return res.send(err);
+    conn.query(
+      "SELECT * FROM usuarios WHERE id_usuario = ?",
+      [req.params.id],
+      (err, rows) => {
+        if (err) return res.send(err);
 
+        res.json(rows);
+      }
+    );
+  });
+};
+/*
 const createNewUsuario = (req, res) => {
   const createUser = usuarioService.createNewUsuario(req.params.userId);
   res.send("createNewUsuario");
@@ -32,8 +42,6 @@ const deleteOneUsuario = (req, res) => {
   const deleteUser = usuarioService.deleteOneUsuario(req.params.userId);
   res.send("deleteOneUsuario");
 }; 
-
-
 module.exports = {
   getAllUsuario,
   getOneUsuario,
