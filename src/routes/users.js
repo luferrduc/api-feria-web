@@ -5,6 +5,8 @@ const router = Router();
 router
 .get("/usuarios/", getAllUsers)
 .get("/usuarios/:id", getOneUser)
+//.delete("/usuarios/:id", deleteOneUsuario);
+//.post("/usuarios/", createNewUsuario)
 /*.
   estos faltan
   .post("/usuarios/id", usuariosController.createNewUsuario)
