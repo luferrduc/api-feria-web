@@ -7,7 +7,7 @@ import UserRoutes from "./routes/usuarios.js";
 
 // Inicialización
 const app = express();
-const __dirname = dirname(fileURLToPath(import.meta.url)); // Objeto global que da info del archivo que está ejecutando el códifo
+const __dirname = dirname(fileURLToPath(import.meta.url)); // Objeto global que da info del archivo que está ejecutando el código
 // Configuraciones
 app.set("port", process.env.PORT || 3001);
 // Middlewares
