@@ -4,13 +4,10 @@ export const getAllUsers = (req, res) => {
   req.getConnection((err, conn) => {
     if (err) return res.send(err);
     conn.query(
-      `select u.id_usuario, u.nombre_usuario, u.password, p.nombre, p.apellido_p, p.apellido_m, 
-      p.rut, p.direccion, u.imagen, c.desc as ciudad, pa.desc as pais,
-      ru.desc as rol_usuario
-      from usuarios u 
-      inner join persona p on u.id_persona = p.id_persona
-      inner join ciudad c on c.id_ciudad = p.id_ciudad
-      inner join pais pa on pa.id_pais = c.id_pais
+      `select u.id_usuario, u.nombre_usuario, u.password,
+      p.nombre, p.apellido_p, p.apellido_m, u.imagen,
+      ru.descripcion as rol_usuario, p.rut, p.direccion, p.ciudad, p.ciudad 
+      from usuarios u inner join persona p on u.id_persona = p.id_persona
       inner join rol_usuarios ru on ru.id_rol = u.id_rol
       `,
       (err, rows) => {
@@ -26,15 +23,12 @@ export const getOneUser = (req, res) => {
   req.getConnection((err, conn) => {
     if (err) return res.send(err);
     conn.query(
-      `select u.nombre_usuario, u.password, p.nombre, p.apellido_p, p.apellido_m, 
-      p.rut, p.direccion, u.imagen, c.desc as ciudad, pa.desc as pais,
-      ru.desc as rol_usuario
-      from usuarios u 
-      inner join persona p on u.id_persona = p.id_persona
-      inner join ciudad c on c.id_ciudad = p.id_ciudad
-      inner join pais pa on pa.id_pais = c.id_pais
-      inner join rol_usuarios ru on ru.id_rol = u.id_rol
-      where u.id_persona = ?`,
+      `select u.id_usuario, u.nombre_usuario, u.password,
+      p.nombre, p.apellido_p, p.apellido_m, u.imagen,
+      ru.descripcion as rol_usuario, p.rut, p.direccion, p.ciudad, p.ciudad 
+      from usuarios u inner join persona p on u.id_persona = p.id_persona
+      inner join rol_usuarios ru on ru.id_rol = u.id_rol where u.nombre_usuario = ?;
+      `,
       [req.params.id],
       (err, rows) => {
         if (err) return res.send(err);
