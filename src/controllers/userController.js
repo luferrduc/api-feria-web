@@ -5,7 +5,7 @@ export const getAllUsers = (req, res) => {
     conn.query(
       `select u.id_usuario, u.nombre_usuario, u.password,
       p.nombre, p.apellido_p, p.apellido_m, u.imagen, 
-      ru.descripcion as rol_usuario, p.rut, p.direccion, p.ciudad, p.ciudad, u.email
+      ru.descripcion as rol_usuario, p.num_identificador, p.direccion, p.ciudad, p.ciudad, u.email
       from usuarios u inner join persona p on u.id_persona = p.id_persona
       inner join rol_usuarios ru on ru.id_rol = u.id_rol
       `,
@@ -36,7 +36,6 @@ export const getOneUser = (req, res) => {
     );
   });
 };
-
 
 
 export const addUser = (req, res) => {
