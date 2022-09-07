@@ -2,8 +2,6 @@ import { Router } from "express";
 import {
   getAllUsers,
   getOneUser,
-  addPerson,
-  getPersons,
   addUser,
   deleteUser,
   updateUser
@@ -17,8 +15,7 @@ router
   .delete("/usuarios/:userName", deleteUser)
   .patch("/usuarios/:userName", updateUser)
   
-  .get("/persona/", getPersons)
-  .post("/persona/", addPerson);
+
 
 // CLIENTES EXTERNOS
 
