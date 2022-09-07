@@ -6,7 +6,8 @@ import {
   getPersons,
   addUser,
   deleteUser,
-  updateUser
+  updateUser,
+  getUserRol
 } from "../controllers/userController.js";
 const router = Router();
 
@@ -16,6 +17,7 @@ router
   .post("/usuarios/", addUser)
   .delete("/usuarios/:userName", deleteUser)
   .patch("/usuarios/:userName", updateUser)
+  .get("/rol_usuarios", getUserRol)
   
   .get("/persona/", getPersons)
   .post("/persona/", addPerson);
