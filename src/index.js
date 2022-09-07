@@ -6,17 +6,15 @@ import { fileURLToPath } from "url";
 import { dbOptions } from "./database.js";
 import UserRoutes from "./routes/users.js";
 //para conectarlo a la base de datos
-import mysql from "mysql";
+import mysql from "mysql2";
 import myconn from "express-myconnection";
 
 // Inicialización
 const app = express();
-<<<<<<< HEAD
-const __dirname = dirname(fileURLToPath(import.meta.url)); // Objeto global que da info del archivo que está ejecutando el código
-=======
 
-const __dirname = dirname(fileURLToPath(import.meta.url)); // Objeto global que da info del archivo que está ejecutando el códifo
->>>>>>> ddbd1f388a5328e00ea0b18798e94d5b5a78f4c2
+const __dirname = dirname(fileURLToPath(import.meta.url)); // Objeto global que da info del archivo que está ejecutando el código
+
+
 // Configuraciones
 app.set("port", process.env.PORT || 3001);
 // Middlewares
