@@ -1,2 +1,56 @@
 ###
-GET http://localhost:3001/usuarios/ HTTP/1.1
+GET http://localhost:3001/api/usuarios/ HTTP/1.1
+
+###
+GET http://localhost:3001/api/persona/ HTTP/1.1
+
+
+###
+POST http://localhost:3001/api/persona/ HTTP/1.1
+content-type: application/json
+
+{
+    "nombre": "Luciano",
+    "apellido_p": "Ferrando",
+    "apellido_m": "Donoso",
+    "direccion": "El Olimpo",
+    "pais": "Chile",
+    "ciudad": "Santiago",
+    "num_identificador": "18.621.142-1"
+}
+###
+POST http://localhost:3001/api/usuarios/ HTTP/1.1
+content-type: application/json
+
+{
+    "nombre_usuario": "LuFer",
+    "password": "12345",
+    "email": "lu.ferrando@duocuc.cl",
+    "id_persona": 1,
+    "id_rol": 1
+}
+###
+DELETE http://localhost:3001/api/persona/23.213.144-2 HTTP/1.1
+
+###
+POST http://localhost:3001/api/usuarios/ HTTP/1.1
+content-type: application/json
+
+{
+    "nombre_usuario": "MarceloM",
+    "password": "5678",
+    "email": "ma.mardonesg@duocuc.cl",
+    "id_persona": 2,
+    "id_rol": 2
+}
+###
+DELETE http://localhost:3001/api/usuarios/MarceloM HTTP/1.1
+
+
+###
+PATCH http://localhost:3001/api/persona/23.213.144-2 HTTP/1.1
+content-type: application/json
+
+{
+    "direccion": "Tartato"
+}
