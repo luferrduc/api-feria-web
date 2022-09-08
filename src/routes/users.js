@@ -11,7 +11,6 @@ import { body } from "express-validator";
 const router = Router();
 
 router
-
   .get("/", getAllUsers)
   .get("/:userName", getOneUser)
   .post(
@@ -27,5 +26,6 @@ router
   .delete("/:userName", deleteUser)
   .patch("/:userName", updateUser)
   .get("/rol_usuarios", getUserRol);
+
 
 export default router;

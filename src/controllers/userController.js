@@ -1,3 +1,5 @@
+import { validationResult } from "express-validator";
+
 export const getAllUsers = (req, res) => {
   //const allUsers = usuarioService.getAllUsuario;
   req.getConnection((err, conn) => {
@@ -37,27 +39,9 @@ export const getOneUser = (req, res) => {
   });
 };
 
-export const getPersons = (req, res) => {
-  req.getConnection((err, conn) => {
-    if (err) return res.send(err);
-    conn.query("SELECT * FROM persona", [req.params.userName], (err, rows) => {
-      if (err) return res.send(err);
-      res.json(rows);
-    });
-  });
-};
-
-export const addPerson = (req, res) => {
-  req.getConnection((err, conn) => {
-    if (err) return res.send(err);
-    conn.query("INSERT INTO persona set ?", [req.body], (err, rows) => {
-      if (err) return res.send(err);
-      res.send("Persona registrada");
-    });
-  });
-};
-
 export const addUser = (req, res) => {
+  const errors = validationResult(req);
+  if(!errors.isEmpty()) return res.status(400).json({errors: errors.array()})
   req.getConnection((err, conn) => {
     if (err) return res.send(err);
     conn.query("INSERT INTO usuarios set ?", [req.body], (err, rows) => {
