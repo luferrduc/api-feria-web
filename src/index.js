@@ -27,8 +27,8 @@ app.use(express.json());
 app.use(myconn(mysql, dbOptions, "single")); // Conexion base de datos
 
 // Rutas
-app.use("/api", UserRoutes);
-app.use("/api", PersonsRoutes);
+app.use("/api/usuarios", UserRoutes);
+app.use("/api/persona", PersonsRoutes);
 app.use("/api/auth", AuthRoutes);
 
 // Archivos estáticos
