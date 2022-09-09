@@ -50,7 +50,7 @@ export const updatePerson = (req, res) => {
       req.params.numId
     ] , (error, rows) => {
       if(error) return res.send(error)
-      res.sed("Persona modificada correctamente")
+      res.send("Persona modificada correctamente")
     });
 
   });

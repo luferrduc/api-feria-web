@@ -13,6 +13,6 @@ router
   .get("/:numId", getOnePerson)
   .post("/", addPerson)
   .delete("/:numId", deletePerson)
-  .patch("/:numId", updatePerson);
+  .put("/:numId", updatePerson);
 
 export default router;
