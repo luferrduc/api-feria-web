@@ -24,7 +24,7 @@ router
     addUser
   )
   .delete("/:userName", deleteUser)
-  .patch("/:userName", updateUser)
+  .put("/:userName", updateUser)
   .get("/rol_usuarios", getUserRol);
 
 
