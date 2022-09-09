@@ -1,3 +1,5 @@
+import { validationResult } from "express-validator";
+
 export const getAllUsers = (req, res) => {
   //const allUsers = usuarioService.getAllUsuario;
   req.getConnection((err, conn) => {
@@ -37,8 +39,9 @@ export const getOneUser = (req, res) => {
   });
 };
 
-
 export const addUser = (req, res) => {
+  const errors = validationResult(req);
+  if(!errors.isEmpty()) return res.status(400).json({errors: errors.array()})
   req.getConnection((err, conn) => {
     if (err) return res.send(err);
     conn.query("INSERT INTO usuarios set ?", [req.body], (err, rows) => {
@@ -70,6 +73,19 @@ export const updateUser = (req, res) => {
       (err, rows) => {
         if (err) return res.send(err);
         res.send("Usuario actualizado!");
+      }
+    );
+  });
+};
+
+export const getUserRol = (req, res) => {
+  req.getConnection((err, conn) => {
+    if (err) return res.send(err);
+    conn.query(
+      "SELECT * FROM rol_usuarios",
+      (err, rows) => {
+        if (err) return res.send(err);
+        res.send(rows);
       }
     );
   });

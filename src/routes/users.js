@@ -4,21 +4,28 @@ import {
   getOneUser,
   addUser,
   deleteUser,
-  updateUser
+  updateUser,
+  getUserRol,
 } from "../controllers/userController.js";
+import { body } from "express-validator";
 const router = Router();
 
 router
-  .get("/usuarios/", getAllUsers)
-  .get("/usuarios/:userName", getOneUser)
-  .post("/usuarios/", addUser)
-  .delete("/usuarios/:userName", deleteUser)
-  .patch("/usuarios/:userName", updateUser)
-  
+  .get("/", getAllUsers)
+  .get("/:userName", getOneUser)
+  .post(
+    "/",
+    [
+      body("email", "El formato del email es incorrecto")
+        .trim()
+        .isEmail()
+        .normalizeEmail(),
+    ],
+    addUser
+  )
+  .delete("/:userName", deleteUser)
+  .put("/:userName", updateUser)
+  .get("/rol_usuarios", getUserRol);
 
-
-// CLIENTES EXTERNOS
-
-// CLIENTES INTERNOS
 
 export default router;

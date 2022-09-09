@@ -4,13 +4,15 @@ import {
   getPersons,
   deletePerson,
   updatePerson,
+  getOnePerson,
 } from "../controllers/personsController.js";
 const router = Router();
 
 router
-  .get("/persona/", getPersons)
-  .post("/persona/", addPerson)
-  .delete("/persona/:numId", deletePerson)
-  .patch("/persona/:numId", updatePerson)
+  .get("/", getPersons)
+  .get("/:numId", getOnePerson)
+  .post("/", addPerson)
+  .delete("/:numId", deletePerson)
+  .put("/:numId", updatePerson);
 
 export default router;
