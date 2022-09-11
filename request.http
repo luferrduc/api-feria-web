@@ -1,5 +1,5 @@
 ###
-GET http://localhost:3001/api/usuarios/ HTTP/1.1
+GET http://localhost:3001/api/usuarios/rol/rol_usuarios HTTP/1.1
 
 ###
 GET http://localhost:3001/api/persona/ HTTP/1.1

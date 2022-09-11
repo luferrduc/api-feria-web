@@ -13,6 +13,7 @@ const router = Router();
 router
   .get("/", getAllUsers)
   .get("/:userName", getOneUser)
+  .get("/rol/rol_usuarios", getUserRol)
   .post(
     "/",
     [
@@ -24,8 +25,7 @@ router
     addUser
   )
   .delete("/:userName", deleteUser)
-  .put("/:userName", updateUser)
-  .get("/rol_usuarios", getUserRol);
+  .put("/:userName", updateUser);
 
 
 export default router;
