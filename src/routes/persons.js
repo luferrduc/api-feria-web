@@ -6,11 +6,12 @@ import {
   updatePerson,
   getOnePerson,
 } from "../controllers/personsController.js";
+
+// Validaciones
 import { body, check } from "express-validator";
 import { errorValidation } from "../middlewares/errorsValidation.js";
 import { voidFieldPerson } from "../middlewares/voidField.js";
 
-//
 const router = Router();
 
 router

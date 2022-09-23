@@ -1,5 +1,6 @@
 import { pool } from "../db/database.js";
 import { validationResult } from "express-validator";
+
 // export const getPersons = (req, res) => {
 //   req.getConnection((err, conn) => {
 //     if (err) return res.send(err);
