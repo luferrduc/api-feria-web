@@ -1,3 +1,4 @@
+import { json } from "express";
 import { validationResult } from "express-validator";
 import { pool } from "../db/database.js";
 
@@ -62,11 +63,9 @@ export const getOneUser = async (req, res) => {
   try {
     const [rows] = await pool.query(sqlQuery, [nombre_usuario]);
     if (rows.length <= 0)
-      return res
-        .status(404)
-        .json({
-          message: `No se ha encontrado un usuario con el nombre ${nombre_usuario}`,
-        });
+      return res.status(404).json({
+        message: `No se ha encontrado un usuario con el nombre ${nombre_usuario}`,
+      });
     res.json(rows[0]);
   } catch (error) {
     res.json({ message: error.message });
@@ -97,8 +96,9 @@ export const addUser = async (req, res) => {
       id_rol === "" ||
       id_persona === "" ||
       email === ""
-    )
-     { throw new Error("Alguno de los campos se encuentra vacío");}
+    ) {
+      throw new Error("Alguno de los campos se encuentra vacío");
+    }
 
     const sqlQuery = `INSERT INTO usuarios (password, nombre_usuario, id_rol, id_persona, imagen, email) VALUES (?,?,?,?,?,?)`;
     const [rows] = await pool.query(sqlQuery, [
@@ -121,39 +121,93 @@ export const addUser = async (req, res) => {
   } catch (error) {}
 };
 
-export const deleteUser = (req, res) => {
-  req.getConnection((err, conn) => {
-    if (err) return res.send(err);
-    conn.query(
-      "DELETE FROM usuarios WHERE nombre_usuario = ?",
-      [req.params.userName],
-      (err, rows) => {
-        if (err) return res.send(err);
-        res.send("Usuario eliminado");
-      }
-    );
-  });
-};
-export const updateUser = (req, res) => {
-  req.getConnection((err, conn) => {
-    if (err) return res.send(err);
-    conn.query(
-      "UPDATE usuarios SET ? WHERE nombre_usuario = ?",
-      [req.body, req.params.userName],
-      (err, rows) => {
-        if (err) return res.send(err);
-        res.send("Usuario actualizado!");
-      }
-    );
-  });
+// export const deleteUser = (req, res) => {
+//   req.getConnection((err, conn) => {
+//     if (err) return res.send(err);
+//     conn.query(
+//       "DELETE FROM usuarios WHERE nombre_usuario = ?",
+//       [req.params.userName],
+//       (err, rows) => {
+//         if (err) return res.send(err);
+//         res.send("Usuario eliminado");
+//       }
+//     );
+//   });
+// };
+
+export const deleteUser = async (req, res) => {
+  const nombre_usuario = req.params.userName;
+  const sqlQuery = `DELETE FROM usuarios WHERE nombre_usuario = ?`;
+  try {
+    const [result] = await pool.query(sqlQuery, nombre_usuario);
+    if (result.affectedRows < 0)
+      return res.status(404).json({ message: `Empleado no encontrado` });
+    res.sendStatus(204);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
-export const getUserRol = (req, res) => {
-  req.getConnection((err, conn) => {
-    if (err) return res.send(err);
-    conn.query(`SELECT * FROM rol_usuarios`, (err, rows) => {
-      if (err) return res.send(err);
-      res.send(rows);
-    });
-  });
+// export const updateUser = (req, res) => {
+//   req.getConnection((err, conn) => {
+//     if (err) return res.send(err);
+//     conn.query(
+//       "UPDATE usuarios SET ? WHERE nombre_usuario = ?",
+//       [req.body, req.params.userName],
+//       (err, rows) => {
+//         if (err) return res.send(err);
+//         res.send("Usuario actualizado!");
+//       }
+//     );
+//   });
+// };
+
+// Estaba pensando que si podemos usar los ID para hacer todas las operaciones, ya que
+// al final se sacan de una lista, no es necesario que el ADMIN se sepa los ID
+
+export const updateUser = async (req, res) => {
+  const nombre_usuario = req.params.userName;
+  const { password, id_rol, imagen, email } = req.body;
+  const sqlQuery = `UPDATE usuarios SET nombre_usuario = ?, imagen = ?, password = ?,
+                     email = ?, id_rol = ? WHERE nombre_usuario = ?`;
+
+  try {
+    const [result] = await pool.query(sqlQuery, [
+      nombre_usuario,
+      imagen,
+      password,
+      email,
+      id_rol,
+      nombre_usuario,
+    ]);
+    if (result.affectedRows === 0)
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    const [rows] = await pool.query(
+      "SELECT * FROM usuarios WHERE nombre_usuario = ?",
+      nombre_usuario
+    );
+    res.json(rows[0]);
+  } catch (error) {
+    res.json({ message: error.message });
+  }
+};
+
+// export const getUserRol = (req, res) => {
+//   req.getConnection((err, conn) => {
+//     if (err) return res.send(err);
+//     conn.query(`SELECT * FROM rol_usuarios`, (err, rows) => {
+//       if (err) return res.send(err);
+//       res.send(rows);
+//     });
+//   });
+// };
+
+export const getUserRol = async (req, res) => {
+  const sqlQuery = "SELECT * FROM rol_usuarios";
+  try {
+    const [result] = await pool.query(sqlQuery);
+    res.json(result);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };

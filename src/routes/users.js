@@ -29,6 +29,15 @@ router
     addUser
   )
   .delete("/:userName", deleteUser)
-  .put("/:userName", updateUser);
+  .put(
+    "/:userName",
+    [
+      body("email", "El formato del email es incorrecto")
+        .trim()
+        .isEmail()
+        .normalizeEmail(),
+    ],
+    updateUser
+  );
 
 export default router;
