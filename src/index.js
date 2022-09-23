@@ -12,13 +12,15 @@ import AuthRoutes from "./routes/auth.js";
 import mysql from "mysql2";
 import myconn from "express-myconnection";
 
+import { PORT } from "./config.js";
+
 // Inicialización
 const app = express();
 
 const __dirname = dirname(fileURLToPath(import.meta.url)); // Objeto global que da info del archivo que está ejecutando el código
 
 // Configuraciones
-app.set("port", process.env.PORT || 3001);
+app.set("port", PORT || 3001);
 // Middlewares
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
@@ -30,6 +32,7 @@ app.use(express.json());
 app.use("/api/usuarios", UserRoutes);
 app.use("/api/persona", PersonsRoutes);
 app.use("/api/auth", AuthRoutes);
+// Rutas sin definir
 app.use((req, res, next) => {
   res.status(404).json({
     message: "Not found",
