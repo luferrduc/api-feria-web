@@ -3,7 +3,7 @@ import morgan from "morgan";
 import { dirname, join } from "path";
 // Da rutas de un archivo del directorio
 import { fileURLToPath } from "url";
-import { dbOptions } from "./db/database.js";
+//import { dbOptions } from "./db/database.js";
 // Importación de las rutas
 import UserRoutes from "./routes/users.js";
 import PersonsRoutes from "./routes/persons.js";
@@ -24,7 +24,7 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use(myconn(mysql, dbOptions, "single")); // Conexion base de datos
+//app.use(myconn(mysql, dbOptions, "single")); // Conexion base de datos
 
 // Rutas
 app.use("/api/usuarios", UserRoutes);

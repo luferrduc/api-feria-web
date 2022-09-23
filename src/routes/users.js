@@ -8,6 +8,9 @@ import {
   getUserRol,
 } from "../controllers/userController.js";
 import { body } from "express-validator";
+import { errorValidation } from "../middlewares/errorsValidation.js";
+
+//
 const router = Router();
 
 router
@@ -22,10 +25,10 @@ router
         .isEmail()
         .normalizeEmail(),
     ],
+    errorValidation,
     addUser
   )
   .delete("/:userName", deleteUser)
   .put("/:userName", updateUser);
-
 
 export default router;
