@@ -54,7 +54,6 @@ export const getAllUsers = async (req, res) => {
 
 export const getOneUser = async (req, res) => {
   const nombre_usuario = req.params.userName;
-  console.log(nombre_usuario);
   const sqlQuery = `select u.id_usuario, u.nombre_usuario, u.password,
          p.nombre, p.apellido_p, p.apellido_m, u.imagen,
          ru.descripcion as rol_usuario, p.num_identificador, p.direccion, p.ciudad, p.ciudad, u.email
