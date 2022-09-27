@@ -11,6 +11,7 @@ import AuthRoutes from "./routes/auth.js";
 // Para conectarlo a la base de datos
 import mysql from "mysql2";
 import myconn from "express-myconnection";
+import cors from 'cors'
 
 import { PORT } from "./config.js";
 
@@ -25,7 +26,7 @@ app.set("port", PORT || 3001);
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
+app.use(cors())
 //app.use(myconn(mysql, dbOptions, "single")); // Conexion base de datos
 
 // Rutas
