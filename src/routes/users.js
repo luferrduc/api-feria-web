@@ -8,6 +8,9 @@ import {
   getUserRol,
 } from "../controllers/userController.js";
 import { body } from "express-validator";
+import { errorValidation } from "../middlewares/errorsValidation.js";
+
+//
 const router = Router();
 
 router
@@ -22,10 +25,19 @@ router
         .isEmail()
         .normalizeEmail(),
     ],
+    errorValidation,
     addUser
   )
   .delete("/:userName", deleteUser)
-  .put("/:userName", updateUser);
-
+  .put(
+    "/:userName",
+    [
+      body("email", "El formato del email es incorrecto")
+        .trim()
+        .isEmail()
+        .normalizeEmail(),
+    ],
+    updateUser
+  );
 
 export default router;
