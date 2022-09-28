@@ -11,7 +11,7 @@ export const login = async (req, res) => {
     const hashPassword = rows[0].password;
     // Comparar la contraseña que viene de front con la de la BD
     const comparedPass = await comparar(password, hashPassword);
-    if (comparedPass) return res.json({ message: "Contraseña no coincide" });
+    if (!comparedPass) return res.json({ message: "Contraseña no coincide" });
     res.json(rows[0]);
   } catch (error) {
     res.json({ message: error.message });
