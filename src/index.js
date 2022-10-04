@@ -8,7 +8,9 @@ import { fileURLToPath } from "url";
 import UserRoutes from "./routes/users.js";
 import PersonsRoutes from "./routes/persons.js";
 import AuthRoutes from "./routes/auth.js";
+import ContratosRoutes from "./routes/contratos.js"
 import ProductRoutes from "./routes/productos.js"
+
 // Para conectarlo a la base de datos
 import mysql from "mysql2";
 import myconn from "express-myconnection";
@@ -34,7 +36,9 @@ app.use(cors())
 app.use("/api/usuarios", UserRoutes);
 app.use("/api/persona", PersonsRoutes);
 app.use("/api/auth", AuthRoutes);
+app.use("/api/contratos", ContratosRoutes);
 app.use("/api/productos", ProductRoutes);
+
 // Rutas sin definir
 app.use((req, res, next) => {
   res.status(404).json({
