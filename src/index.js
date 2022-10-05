@@ -10,6 +10,7 @@ import PersonsRoutes from "./routes/persons.js";
 import AuthRoutes from "./routes/auth.js";
 import ContratosRoutes from "./routes/contratos.js"
 import ProductRoutes from "./routes/productos.js"
+import SubastaRoutes from "./routes/subastas.js"
 
 // Para conectarlo a la base de datos
 import mysql from "mysql2";
@@ -38,6 +39,7 @@ app.use("/api/persona", PersonsRoutes);
 app.use("/api/auth", AuthRoutes);
 app.use("/api/contratos", ContratosRoutes);
 app.use("/api/productos", ProductRoutes);
+app.use("/api/subastas", SubastaRoutes);
 
 // Rutas sin definir
 app.use((req, res, next) => {
