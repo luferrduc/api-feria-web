@@ -33,7 +33,6 @@ export const addProduct = async (req, res) =>{
         id_producto,
         nombre,
         precio,
-        calidad,
         observaciones,
         id_calidad,
         imagen,
@@ -44,7 +43,6 @@ export const addProduct = async (req, res) =>{
             id_producto === "" ||
             nombre === "" ||
             precio === "" ||
-            calidad === "" ||
             observaciones === "" ||
             id_calidad === "" ||
             imagen === ""
@@ -57,7 +55,6 @@ export const addProduct = async (req, res) =>{
             id_producto,
             nombre,
             precio,
-            calidad,
             observaciones,
             id_calidad,
             imagen,
@@ -82,14 +79,13 @@ export const deleteProduct = async (req, res) => {
 
 export const updateProduct = async (req,res) => {
     const id_producto = req.params.numId;
-    const { nombre, precio, calidad, observaciones, id_calidad, imagen } = req.body;
+    const { nombre, precio, observaciones, id_calidad, imagen } = req.body;
     const sqlQuery = `UPDATE productos SET nombre = ?, precio = ?, calidad = ?
                       observaciones = ?, id_calidad = ?, imagen = ?`;
     try{
         const [result] = await pool.query(sqlQuery,[
             nombre,
             precio,
-            calidad,
             observaciones,
             id_calidad,
             imagen,
