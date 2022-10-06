@@ -25,6 +25,7 @@ export const getOneSubasta = async (req, res) => {
     }
 };
 
+
 export const addSubasta = async (req, res ) => {
     const{
         id_subasta,

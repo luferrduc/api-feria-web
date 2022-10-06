@@ -41,6 +41,7 @@ app.use("/api/contratos", ContratosRoutes);
 app.use("/api/productos", ProductRoutes);
 app.use("/api/subastas", SubastaRoutes);
 
+
 // Rutas sin definir
 app.use((req, res, next) => {
   res.status(404).json({

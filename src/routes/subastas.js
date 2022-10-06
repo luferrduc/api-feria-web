@@ -9,6 +9,7 @@ import{
 
 const router = Router();
 
+
 router
    .get("/", getSubastas)
    .get("/:subId", getOneSubasta)
