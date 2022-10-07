@@ -11,8 +11,8 @@ export const getSubastas = async (req, res) => {
 };
 
 export const getOneSubasta = async (req, res) => {
-  const id_subasta = req.params.subId;
-  const sqlQuery = `SELECT * subasta_transporte WHERE id_subasta = ?`;
+  const id_subasta = parseInt(req.params.subId);
+  const sqlQuery = "SELECT * FROM subasta_transporte WHERE id_subasta = ?";
   try {
     const [rows] = await pool.query(sqlQuery, [id_subasta]);
     if (rows.length <= 0)
@@ -21,7 +21,7 @@ export const getOneSubasta = async (req, res) => {
       });
     res.json(rows[0]);
   } catch (error) {
-    res.json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
