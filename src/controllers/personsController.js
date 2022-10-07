@@ -150,7 +150,7 @@ export const updatePerson = async (req, res) => {
   const num_identificador = req.params.numId;
   const { nombre, apellido_p, apellido_m, direccion, pais, ciudad } = req.body;
   const sqlQuery = `UPDATE persona SET nombre = ?, apellido_p = ?, apellido_m = ?
-                    direccion = ?, pais = ?, ciudad = ?`;
+                    direccion = ?, pais = ?, ciudad = ? WHERE num_identificador = ?`;
   try {
     const [result] = await pool.query(sqlQuery, [
       nombre,
@@ -159,6 +159,7 @@ export const updatePerson = async (req, res) => {
       direccion,
       pais,
       ciudad,
+      num_identificador
     ]);
     if (result.affectedRows === 0)
       return res.status(404).json({ message: "Persona no encontrada" });

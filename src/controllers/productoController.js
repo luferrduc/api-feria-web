@@ -81,7 +81,7 @@ export const updateProduct = async (req,res) => {
     const id_producto = req.params.numId;
     const { nombre, precio, observaciones, id_calidad, imagen } = req.body;
     const sqlQuery = `UPDATE productos SET nombre = ?, precio = ?, calidad = ?
-                      observaciones = ?, id_calidad = ?, imagen = ?`;
+                      observaciones = ?, id_calidad = ?, imagen = ? WHERE id_producto = ?`;
     try{
         const [result] = await pool.query(sqlQuery,[
             nombre,
@@ -89,6 +89,7 @@ export const updateProduct = async (req,res) => {
             observaciones,
             id_calidad,
             imagen,
+            id_producto
         ]);
         if (result.affectedRows === 0)
           return res.status(404).json({ message: "Prodcuto no encontrado" });

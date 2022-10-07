@@ -84,7 +84,7 @@ export const updateSubasta = async (req, res) => {
     const id_subasta = req.param.subId;
     const { ganador, fecha_ter, fecha_inicio, cargo, total, estado, id_venta } = req.body;
     const sqlQuery = `UPDATE subasta_transporte SET ganador = ?, fecha_ter = ?, fecha_inicio = ?,
-                      cargo = ?, total = ?, estado = ?, id_ventas = ?`;
+                      cargo = ?, total = ?, estado = ?, id_ventas = ? WHERE id_subasta = ?`;
     try{
         const [result] = await pool.query(sqlQuery, [
             ganador,
@@ -94,6 +94,7 @@ export const updateSubasta = async (req, res) => {
             total,
             estado,
             id_venta,
+            id_subasta
         ]);
         if(result.affectedRows === 0)
          return res.status(404).json({ message: "Subasta no encontrada" });
