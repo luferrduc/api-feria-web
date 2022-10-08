@@ -6,7 +6,7 @@ import { cookie } from "express-validator";
 
 export const login = async (req, res) => {
   const { nombre_usuario, password } = req.body;
-  const queryConsulta = `SELECT * from usuarios WHERE nombre_usuario = ?`;
+  const queryConsulta = `SELECT * FROM usuarios WHERE nombre_usuario = ?`;
   try {
     const [rows] = await pool.query(queryConsulta, [nombre_usuario]);
     if (rows.length <= 0)

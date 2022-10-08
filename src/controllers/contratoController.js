@@ -14,7 +14,7 @@ export const getContratos = async (req, res) => {
 
 export const getOneContrato = async (req, res) => {
     const id_contrato = req.params.conId;
-    const sqlQuery = `SELECT * productos WHERE id_contrato = ?`;
+    const sqlQuery = `SELECT * FROM productos WHERE id_contrato = ?`;
     try{
         const [rows] = await pool.query(sqlQuery, [id_contrato]);
         if (rows.length <= 0)

@@ -12,7 +12,7 @@ export const getProducts = async (req, res) => {
 
 export const getOneProduct = async (req, res) => {
   const id_producto = req.params.proId;
-  const sqlQuery = `SELECT * productos WHERE id_producto = ?`;
+  const sqlQuery = `SELECT * FROM productos WHERE id_producto = ?`;
   try {
     const [rows] = await pool.query(sqlQuery, [id_producto]);
     if (rows.length <= 0)
