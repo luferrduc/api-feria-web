@@ -58,7 +58,7 @@ export const addProduct = async (req, res) => {
 };
 
 export const deleteProduct = async (req, res) => {
-  const id_producto = req.params.numId;
+  const id_producto = parseInt(req.params.numId);
   const sqlQuery = "DELETE FROM productos WHERE id_producto = ?";
   try {
     const [result] = await pool.query(sqlQuery, [id_producto]);
