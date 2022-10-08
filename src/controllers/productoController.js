@@ -58,7 +58,7 @@ export const addProduct = async (req, res) => {
 };
 
 export const deleteProduct = async (req, res) => {
-  const id_producto = parseInt(req.params.numId);
+  const id_producto = parseInt(req.params.proId);
   const sqlQuery = "DELETE FROM productos WHERE id_producto = ?";
   try {
     const [result] = await pool.query(sqlQuery, [id_producto]);
@@ -71,7 +71,7 @@ export const deleteProduct = async (req, res) => {
 };
 
 export const updateProduct = async (req, res) => {
-  const id_producto = req.params.numId;
+  const id_producto = req.params.proId;
   const { nombre, precio, observaciones, id_calidad, imagen } = req.body;
   const sqlQuery = `UPDATE productos SET nombre = ?, precio = ?, calidad = ?
                       observaciones = ?, id_calidad = ?, imagen = ? WHERE id_producto = ?`;
