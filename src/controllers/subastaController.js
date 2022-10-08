@@ -75,7 +75,7 @@ export const deleteSubasta = async (req, res) => {
   const id_subasta = req.params.subId;
   const sqlQuery = "DELETE FROM subasta_transporte WHERE id_subasta = ?";
   try {
-    const [result] = await pool.query(sqlQuery, id_subasta);
+    const [result] = await pool.query(sqlQuery, [id_subasta]);
     if (result.affectedRows < 0)
       return res.status(404).json({ message: `Subasta no encontrada` });
     res.sendStatus(204);
@@ -105,7 +105,7 @@ export const updateSubasta = async (req, res) => {
       return res.status(404).json({ message: "Subasta no encontrada" });
     const [rows] = await pool.query(
       "SELECT * FROM subasta_transporte WHERE id_subasta = ?",
-      id_subasta
+      [id_subasta]
     );
     res.json(rows[0]);
   } catch (error) {

@@ -73,7 +73,7 @@ export const deleteUser = async (req, res) => {
   const nombre_usuario = req.params.userName;
   const sqlQuery = `DELETE FROM usuarios WHERE nombre_usuario = ?`;
   try {
-    const [result] = await pool.query(sqlQuery, nombre_usuario);
+    const [result] = await pool.query(sqlQuery, [nombre_usuario]);
     if (result.affectedRows < 0)
       return res.status(404).json({ message: `Empleado no encontrado` });
     res.sendStatus(204);
@@ -101,7 +101,7 @@ export const updateUser = async (req, res) => {
       return res.status(404).json({ message: "Usuario no encontrado" });
     const [rows] = await pool.query(
       "SELECT * FROM usuarios WHERE nombre_usuario = ?",
-      nombre_usuario
+      [nombre_usuario]
     );
     res.json(rows[0]);
   } catch (error) {

@@ -123,7 +123,7 @@ export const deletePerson = async (req, res) => {
   const num_identificador = req.params.numId;
   const sqlQuery = "DELETE FROM persona WHERE num_identificador = ?";
   try {
-    const [result] = await pool.query(sqlQuery, num_identificador);
+    const [result] = await pool.query(sqlQuery, [num_identificador]);
     if (result.affectedRows < 0)
       return res.status(404).json({ message: `Persona no encontrado` });
     res.sendStatus(204);
@@ -165,7 +165,7 @@ export const updatePerson = async (req, res) => {
       return res.status(404).json({ message: "Persona no encontrada" });
     const [rows] = await pool.query(
       "SELECT * FROM persona WHERE num_identificador = ?",
-      num_identificador
+      [num_identificador]
     );
     res.json(rows[0]);
   } catch (error) {

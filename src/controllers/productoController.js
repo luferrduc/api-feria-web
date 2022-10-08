@@ -21,7 +21,7 @@ export const getOneProduct = async (req, res) => {
       });
     res.json(rows[0]);
   } catch (error) {
-    res.satus(500).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -88,7 +88,7 @@ export const updateProduct = async (req, res) => {
       return res.status(404).json({ message: "Prodcuto no encontrado" });
     const [rows] = await pool.query(
       "SELECT * FROM productos WHERE id_producto = ?",
-      id_producto
+      [id_producto]
     );
     res.json(rows[0]);
   } catch (error) {
