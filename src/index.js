@@ -11,7 +11,7 @@ import AuthRoutes from "./routes/auth.js";
 import ContratosRoutes from "./routes/contratos.js";
 import ProductRoutes from "./routes/productos.js";
 import SubastaRoutes from "./routes/subastas.js";
-
+import VentasRoutes from "./routes/ventas.js";
 // Para conectarlo a la base de datos
 import mysql from "mysql2";
 import myconn from "express-myconnection";
@@ -40,6 +40,7 @@ app.use("/api/auth", AuthRoutes);
 app.use("/api/contratos", ContratosRoutes);
 app.use("/api/productos", ProductRoutes);
 app.use("/api/subastas", SubastaRoutes);
+app.use("/api/ventas", VentasRoutes);
 
 // Rutas sin definir
 app.use((req, res, next) => {
