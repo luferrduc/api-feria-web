@@ -73,7 +73,7 @@ export const deleteProduct = async (req, res) => {
 export const updateProduct = async (req, res) => {
   const id_producto = req.params.proId;
   const { nombre, precio, observaciones, id_calidad, imagen } = req.body;
-  const sqlQuery = `UPDATE productos SET nombre = ?, precio = ?, calidad = ?
+  const sqlQuery = `UPDATE productos SET nombre = ?, precio = ?,
                       observaciones = ?, id_calidad = ?, imagen = ? WHERE id_producto = ?`;
   try {
     const [result] = await pool.query(sqlQuery, [
