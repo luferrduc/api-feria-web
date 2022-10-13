@@ -13,6 +13,7 @@ import ProductRoutes from "./routes/productos.js";
 import SubastaRoutes from "./routes/subastas.js";
 import VentasRoutes from "./routes/ventas.js";
 import TransporteRoutes from "./routes/transportes.js";
+import PeticionRoutes from "./routes/peticion.js";
 // Para conectarlo a la base de datos
 import mysql from "mysql2";
 import myconn from "express-myconnection";
@@ -43,6 +44,7 @@ app.use("/api/productos", ProductRoutes);
 app.use("/api/subastas", SubastaRoutes);
 app.use("/api/ventas", VentasRoutes);
 app.use("/api/transportes", TransporteRoutes);
+app.use("/api/peticion", PeticionRoutes);
 
 // Rutas sin definir
 app.use((req, res, next) => {
