@@ -24,7 +24,7 @@ export const getOnePeticion= async (req, res) => {
     }catch (error){
         res.status(500).json({ message: error.message});
     }
-}
+};
 
 // POST
 export const addPeticion = async (req, res) =>{
