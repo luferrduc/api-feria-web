@@ -35,6 +35,7 @@ export const addSubasta = async (req, res) => {
     total,
     estado,
     id_venta,
+    observaciones
   } = req.body;
 
   try {
@@ -66,6 +67,7 @@ export const addSubasta = async (req, res) => {
       total,
       estado,
       id_venta,
+      observaciones
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -87,10 +89,10 @@ export const deleteSubasta = async (req, res) => {
 
 export const updateSubasta = async (req, res) => {
   const id_subasta = req.param.subId;
-  const { ganador, fecha_ter, fecha_inicio, cargo, total, estado, id_venta } =
+  const { ganador, fecha_ter, fecha_inicio, cargo, total, estado, observaciones, id_venta} =
     req.body;
   const sqlQuery = `UPDATE subasta_transporte SET ganador = ?, fecha_ter = ?, fecha_inicio = ?,
-                      cargo = ?, total = ?, estado = ?, id_ventas = ? WHERE id_subasta = ?`;
+                      cargo = ?, total = ?, estado = ?, observaciones = ?, id_ventas = ? WHERE id_subasta = ?`;
   try {
     const [result] = await pool.query(sqlQuery, [
       ganador,
@@ -99,6 +101,7 @@ export const updateSubasta = async (req, res) => {
       cargo,
       total,
       estado,
+      observaciones,
       id_venta,
       id_subasta,
     ]);
