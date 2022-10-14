@@ -47,12 +47,13 @@ export const addSubasta = async (req, res) => {
       total === "" ||
       estado === "" ||
       id_venta === ""
-    )
+    ) {
       throw new Error(
         "Algunos campos se encuentran vacios, por favor rellenarlos"
       );
+    }
 
-    const [rows] = await pool.query(`INSERT INTO subasta_trasporte set ?`, [
+    const [rows] = await pool.query(`INSERT INTO subasta_transporte set ?`, [
       req.body,
     ]);
     res.json({
