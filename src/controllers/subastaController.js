@@ -88,11 +88,11 @@ export const deleteSubasta = async (req, res) => {
 };
 
 export const updateSubasta = async (req, res) => {
-  const id_subasta = req.param.subId;
+  const id_subasta = req.params.subId;
   const { ganador, fecha_ter, fecha_inicio, cargo, total, estado, observaciones, id_venta} =
     req.body;
   const sqlQuery = `UPDATE subasta_transporte SET ganador = ?, fecha_ter = ?, fecha_inicio = ?,
-                      cargo = ?, total = ?, estado = ?, observaciones = ?, id_ventas = ? WHERE id_subasta = ?`;
+                      cargo = ?, total = ?, estado = ?, observaciones = ?, id_venta = ? WHERE id_subasta = ?`;
   try {
     const [result] = await pool.query(sqlQuery, [
       ganador,
