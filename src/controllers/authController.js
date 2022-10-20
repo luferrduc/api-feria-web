@@ -2,7 +2,7 @@ import { pool } from "../db/database.js";
 import { comparar } from "../helpers/handleBcrypt.js";
 import jwt from "jsonwebtoken";
 import { serialize } from "cookie";
-import { cookie } from "express-validator";
+
 
 export const login = async (req, res) => {
   const { nombre_usuario, password } = req.body;
