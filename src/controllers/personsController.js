@@ -55,16 +55,7 @@ export const getOnePerson = async (req, res) => {
   }
 };
 
-// export const addPerson = (req, res) => {
-//   console.log(req.body);
-//   req.getConnection((err, conn) => {
-//     if (err) return res.send(err);
-//     conn.query("INSERT INTO persona set ?", [req.body], (err, rows) => {
-//       if (err) return res.send(err);
-//       res.send("Persona registrada");
-//     });
-//   });
-// };
+
 
 export const addPerson = async (req, res) => {
   const {
@@ -105,19 +96,7 @@ export const addPerson = async (req, res) => {
   }
 };
 
-// export const deletePerson = (req, res) => {
-//   req.getConnection((err, conn) => {
-//     if (err) return res.send(err);
-//     conn.query(
-//       "DELETE FROM persona WHERE num_identificador = ?",
-//       [req.params.numId],
-//       (err, rows) => {
-//         if (err) return res.send(err);
-//         res.send("Persona eliminada correctamente");
-//       }
-//     );
-//   });
-// };
+
 
 export const deletePerson = async (req, res) => {
   const num_identificador = req.params.numId;
@@ -132,19 +111,7 @@ export const deletePerson = async (req, res) => {
   }
 };
 
-// export const updatePerson = (req, res) => {
-//   req.getConnection((err, conn) => {
-//     if (err) return res.send(err);
-//     conn.query(
-//       "UPDATE persona SET ? WHERE num_identificador = ?",
-//       [req.body, req.params.numId],
-//       (error, rows) => {
-//         if (error) return res.send(error);
-//         res.send("Persona modificada correctamente");
-//       }
-//     );
-//   });
-// };
+
 
 export const updatePerson = async (req, res) => {
   const num_identificador = req.params.numId;

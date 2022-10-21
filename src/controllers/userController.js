@@ -85,6 +85,8 @@ export const deleteUser = async (req, res) => {
 export const updateUser = async (req, res) => {
   const nombre_usuario = req.params.userName;
   const { password, id_rol, imagen, email } = req.body;
+  const passwordHash = await encriptar(password);
+
   const sqlQuery = `UPDATE usuarios SET nombre_usuario = ?, imagen = ?, password = ?,
                      email = ?, id_rol = ? WHERE nombre_usuario = ?`;
 
@@ -92,7 +94,7 @@ export const updateUser = async (req, res) => {
     const [result] = await pool.query(sqlQuery, [
       nombre_usuario,
       imagen,
-      password,
+      passwordHash,
       email,
       id_rol,
       nombre_usuario,
