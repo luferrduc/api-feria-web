@@ -95,8 +95,9 @@ export const updateUser = async (req, res) => {
       password,
       email,
       id_rol,
-      nombre_usuario,
+      nombre_usuario
     ]);
+    console.log(result)
     if (result.affectedRows === 0)
       return res.status(404).json({ message: "Usuario no encontrado" });
     const [rows] = await pool.query(
@@ -104,6 +105,7 @@ export const updateUser = async (req, res) => {
       [nombre_usuario]
     );
     res.json(rows[0]);
+
   } catch (error) {
     res.json({ message: error.message });
   }

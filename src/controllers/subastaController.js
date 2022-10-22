@@ -26,20 +26,13 @@ export const getOneSubasta = async (req, res) => {
 };
 
 export const addSubasta = async (req, res) => {
-  const {
-    id_subasta,
-    ganador,
-    fecha_ter,
-    fecha_inicio,
-    cargo,
-    total,
-    estado,
-    id_venta,
-  } = req.body;
+  const { ganador, fecha_ter, fecha_inicio, cargo, total, estado, id_venta } =
+    req.body;
+
+  console.log(req.body);
 
   try {
     if (
-      id_subasta === "" ||
       ganador === "" ||
       fecha_ter === "" ||
       fecha_inicio === "" ||
@@ -47,17 +40,24 @@ export const addSubasta = async (req, res) => {
       total === "" ||
       estado === "" ||
       id_venta === ""
-    )
+    ) {
       throw new Error(
         "Algunos campos se encuentran vacios, por favor rellenarlos"
       );
+    }
 
-    const [rows] = await pool.query(`INSERT INTO subasta_trasporte set ?`, [
-      req.body,
+    const sqlQuery = `INSERT INTO subasta_transporte (ganador, fecha_ter, fecha_inicio, cargo, total, estado, id_venta) VALUES (?,?,?,?,?,?,?)`;
+    const [rows] = await pool.query(sqlQuery, [
+      ganador,
+      fecha_ter,
+      fecha_inicio,
+      cargo,
+      total,
+      estado,
+      id_venta,
     ]);
     res.json({
-      id: rows.insertId,
-      id_subasta,
+      id_subasta: rows.insertId,
       ganador,
       fecha_ter,
       fecha_inicio,
@@ -74,6 +74,7 @@ export const addSubasta = async (req, res) => {
 export const deleteSubasta = async (req, res) => {
   const id_subasta = req.params.subId;
   const sqlQuery = "DELETE FROM subasta_transporte WHERE id_subasta = ?";
+  console.log(id_subasta);
   try {
     const [result] = await pool.query(sqlQuery, [id_subasta]);
     if (result.affectedRows < 0)
@@ -85,11 +86,11 @@ export const deleteSubasta = async (req, res) => {
 };
 
 export const updateSubasta = async (req, res) => {
-  const id_subasta = req.param.subId;
-  const { ganador, fecha_ter, fecha_inicio, cargo, total, estado, id_venta } =
-    req.body;
+  const id_subasta = req.params.subId;
+  const {ganador, fecha_ter, fecha_inicio, cargo, total, estado, id_venta, observaciones} = req.body;
   const sqlQuery = `UPDATE subasta_transporte SET ganador = ?, fecha_ter = ?, fecha_inicio = ?,
-                      cargo = ?, total = ?, estado = ?, id_ventas = ? WHERE id_subasta = ?`;
+                    cargo = ?, total = ?, estado = ?, id_venta = ?, observaciones = ? WHERE id_subasta = ?`;
+  console.log(req.body)
   try {
     const [result] = await pool.query(sqlQuery, [
       ganador,
@@ -99,8 +100,10 @@ export const updateSubasta = async (req, res) => {
       total,
       estado,
       id_venta,
-      id_subasta,
+      observaciones,
+      id_subasta
     ]);
+    console.log(result)
     if (result.affectedRows === 0)
       return res.status(404).json({ message: "Subasta no encontrada" });
     const [rows] = await pool.query(

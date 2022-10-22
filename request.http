@@ -2,11 +2,16 @@
 GET http://localhost:3001/api/usuarios/rol/rol_usuarios HTTP/1.1
 
 ###
-GET http://localhost:3001/api/persona/ HTTP/1.1
+GET http://localhost:3001/api/usuarios/ HTTP/1.1
+
+###
+GET http://localhost:3001/api/subasta/ HTTP/1.1
 
 
 ###
-POST http://localhost:3001/api/persona/ HTTP/1.1
+GET http://localhost:3001/api/subastas/ HTTP/1.1
+###
+DELETE http://localhost:3001/api/subastas/3 HTTP/1.1
 content-type: application/json
 
 {
@@ -26,8 +31,9 @@ content-type: application/json
     "nombre_usuario": "LuFer",
     "password": "12345",
     "email": "lu.ferrando@duocuc.cl",
-    "id_persona": 1,
-    "id_rol": 1
+    "id_persona": 4,
+    "id_rol": 1,
+    "imagen": "jose"
 }
 ###
 DELETE http://localhost:3001/api/persona/23.213.144-2 HTTP/1.1
@@ -44,7 +50,7 @@ content-type: application/json
     "id_rol": 2
 }
 ###
-DELETE http://localhost:3001/api/usuarios/MarceloM HTTP/1.1
+DELETE http://localhost:3001/api/usuarios/Luc HTTP/1.1
 
 
 ###
