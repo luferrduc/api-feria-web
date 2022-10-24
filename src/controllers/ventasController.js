@@ -75,7 +75,7 @@ export const deleteVenta = async (req, res) => {
 export const updateVenta = async (req, res) => {
   const id_venta = req.params.venId;
   const { descripcion, total_venta, id_tipo_venta, id_usuario, fecha_venta, estado } = req.body;
-  const sqlQuery = `UPDATE ventas SET descripcion = ?, total_venta = ?, id_tipo_venta = ?
+  const sqlQuery = `UPDATE ventas SET descripcion = ?, total_venta = ?, id_tipo_venta = ?,
                     id_usuario = ?, fecha_venta = ?, estado = ? WHERE id_venta = ?`;
   try {
     const [result] = await pool.query(sqlQuery, [
