@@ -1,15 +1,6 @@
 import { pool } from "../db/database.js";
 import { validationResult } from "express-validator";
 
-// export const getPersons = (req, res) => {
-//   req.getConnection((err, conn) => {
-//     if (err) return res.send(err);
-//     conn.query("SELECT * FROM persona", (err, rows) => {
-//       if (err) return res.send(err);
-//       res.json(rows);
-//     });
-//   });
-// };
 
 export const getPersons = async (req, res) => {
   const sqlQuery = `SELECT * FROM persona`;
@@ -21,24 +12,6 @@ export const getPersons = async (req, res) => {
   }
 };
 
-// export const getOnePerson = (req, res) => {
-//   req.getConnection((err, conn) => {
-//     if (err)
-//       return res.status(500).send("Error en la conexión con la base de datos");
-//     conn.query(
-//       "SELECT * FROM persona WHERE num_identificador = ?",
-//       [req.params.numId],
-//       (err) => {
-//         if (err)
-//           return res
-//             .status(400)
-//             .send(
-//               "Persona no encontrada, intente con un numero identificador válido"
-//             );
-//       }
-//     );
-//   });
-// };
 
 export const getOnePerson = async (req, res) => {
   const num_identificador = req.params.numId;
