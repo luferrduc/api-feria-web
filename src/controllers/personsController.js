@@ -1,7 +1,6 @@
 import { pool } from "../db/database.js";
 import { validationResult } from "express-validator";
 
-
 export const getPersons = async (req, res) => {
   const sqlQuery = `SELECT * FROM persona`;
   try {
@@ -11,7 +10,6 @@ export const getPersons = async (req, res) => {
     res.json({ message: error });
   }
 };
-
 
 export const getOnePerson = async (req, res) => {
   const num_identificador = req.params.numId;
@@ -27,8 +25,6 @@ export const getOnePerson = async (req, res) => {
     res.satus(500).json({ message: error.message });
   }
 };
-
-
 
 export const addPerson = async (req, res) => {
   const {
@@ -55,7 +51,7 @@ export const addPerson = async (req, res) => {
 
     const [rows] = await pool.query(`INSERT INTO persona set ?`, [req.body]);
     res.json({
-      id: rows.insertId,
+      id_persona: rows.insertId,
       nombre,
       apellido_p,
       apellido_m,
@@ -69,27 +65,23 @@ export const addPerson = async (req, res) => {
   }
 };
 
-
-
 export const deletePerson = async (req, res) => {
   const num_identificador = req.params.numId;
   const sqlQuery = "DELETE FROM persona WHERE num_identificador = ?";
   try {
     const [result] = await pool.query(sqlQuery, [num_identificador]);
-    if (result.affectedRows < 0)
-      return res.status(404).json({ message: `Persona no encontrado` });
+    if (result.affectedRows < 1)
+      return res.status(404).json({ message: `Persona no encontrada` });
     res.sendStatus(204);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-
-
 export const updatePerson = async (req, res) => {
   const num_identificador = req.params.numId;
   const { nombre, apellido_p, apellido_m, direccion, pais, ciudad } = req.body;
-  const sqlQuery = `UPDATE persona SET nombre = ?, apellido_p = ?, apellido_m = ?
+  const sqlQuery = `UPDATE persona SET nombre = ?, apellido_p = ?, apellido_m = ?,
                     direccion = ?, pais = ?, ciudad = ? WHERE num_identificador = ?`;
   try {
     const [result] = await pool.query(sqlQuery, [
@@ -99,7 +91,7 @@ export const updatePerson = async (req, res) => {
       direccion,
       pais,
       ciudad,
-      num_identificador
+      num_identificador,
     ]);
     if (result.affectedRows === 0)
       return res.status(404).json({ message: "Persona no encontrada" });
@@ -109,6 +101,6 @@ export const updatePerson = async (req, res) => {
     );
     res.json(rows[0]);
   } catch (error) {
-    res.json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
