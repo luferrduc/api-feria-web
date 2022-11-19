@@ -145,7 +145,7 @@ describe("Users", () => {
     expect(response.body.nombre_usuario).toEqual(newData.nombre_usuario);
   });
 
-  test("PUT Modificar registro de una usuarios de forma incorrecta", async () => {
+  test("PUT Modificar registro de un usuario de forma incorrecta", async () => {
     const userName = "Jb.reyes";
     const newData = {
       email: "jb.reyes@gmail.com",
@@ -159,7 +159,7 @@ describe("Users", () => {
     expect(response.body.message).toEqual("Usuario no encontrado");
   });
 
-  test("DELETE Eliminar una usuarios de forma correcta", async () => {
+  test("DELETE Eliminar un usuarios de forma correcta", async () => {
     const userName = "LuFer";
     const response = await api.delete(`/api/usuarios/${userName}`).send()
     expect(response.statusCode).toBe(204);
