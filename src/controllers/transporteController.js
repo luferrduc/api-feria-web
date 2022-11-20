@@ -26,12 +26,11 @@ export const getOneTransporte = async (req, res) => {
 };
 
 export const addTransporte = async (req, res) => {
-  const { id_transporte, patente, tamano, capacidad_carga, refrigeracion, id_tipo, id_usuario } =
+  const { patente, tamano, capacidad_carga, refrigeracion, id_tipo, id_usuario } =
     req.body;
 
   try {
     if (
-      id_transporte === "" ||
       patente === "" ||
       tamano === "" ||
       capacidad_carga === "" ||
@@ -45,8 +44,7 @@ export const addTransporte = async (req, res) => {
 
     const [rows] = await pool.query(`INSERT INTO transportes set ?`, [req.body]);
     res.json({
-      id: rows.insertId,
-      id_transporte,
+      id_transporte: rows.insertId,
       patente,
       tamano,
       capacidad_carga,
@@ -64,7 +62,7 @@ export const deleteTransporte = async (req, res) => {
   const sqlQuery = "DELETE FROM transportes WHERE id_transporte = ?";
   try {
     const [result] = await pool.query(sqlQuery, [id_transporte]);
-    if (result.affectedRows < 0)
+    if (result.affectedRows <= 0)
       return res.status(404).json({ message: `Transporte no encontrado` });
     res.sendStatus(204);
   } catch (error) {
@@ -75,8 +73,8 @@ export const deleteTransporte = async (req, res) => {
 export const updateTransporte = async (req, res) => {
   const id_transporte = req.params.traId;
   const { patente, tamano, capacidad_carga, refrigeracion, id_tipo, id_usuario } = req.body;
-  const sqlQuery = `UPDATE transportes SET patente = ?, tamano = ?, capacidad_carga = ?
-                      refrigeracion = ?, id_tipo = ?, id_usuario = ?, WHERE id_transporte = ?`;
+  const sqlQuery = `UPDATE transportes SET patente = ?, tamano = ?, capacidad_carga = ?,
+                      refrigeracion = ?, id_tipo = ?, id_usuario = ? WHERE id_transporte = ?`;
   try {
     const [result] = await pool.query(sqlQuery, [
       patente,
@@ -87,7 +85,7 @@ export const updateTransporte = async (req, res) => {
       id_usuario,
       id_transporte,
     ]);
-    if (result.affectedRows === 0)
+    if (result.affectedRows <= 0)
       return res.status(404).json({ message: "Transporte no encontrado" });
     const [rows] = await pool.query(
       "SELECT * FROM transportes WHERE id_transporte = ?",

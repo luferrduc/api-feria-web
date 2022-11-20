@@ -24,7 +24,7 @@ const usuarioInicial = {
   email: "lu.ferrando@duocuc.cl",
 };
 
-describe("Users", () => {
+describe("Products", () => {
   beforeAll(async () => {
     await pool.query("DELETE FROM usuarios");
     await pool.query("DELETE FROM persona");
