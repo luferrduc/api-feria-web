@@ -1,20 +1,24 @@
-// export const dbOptions = {
-//   host: "localhost",
-//   port: 3306,
-//   user: "root",
-//   password: "root",
-//   database: "maipogrande",
-// };
-
 import { createPool } from "mysql2/promise";
-import { DATABASE, DB_HOST, DB_PASSWORD, DB_PORT, DB_USER } from "../config.js";
+import {
+  DATABASE,
+  DB_HOST,
+  DB_PASSWORD,
+  DB_PORT,
+  DB_USER,
+  DATABASE_TEST,
+} from "../config.js";
+const { NODE_ENV } = process.env;
+
+const DB = NODE_ENV === "test" ? DATABASE_TEST : DATABASE;
+
 export const pool = createPool({
   host: DB_HOST,
   port: DB_PORT,
   user: DB_USER,
   password: DB_PASSWORD,
-  database: DATABASE,
+  database: DB,
 });
+
 
 /* 
   mysqlConnection.connect(function (err) {

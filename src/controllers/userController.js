@@ -8,8 +8,12 @@ export const getAllUsers = async (req, res) => {
                     ru.descripcion as rol_usuario, p.num_identificador, p.direccion, p.ciudad, p.ciudad, u.email
                     from usuarios u inner join persona p on u.id_persona = p.id_persona
                     inner join rol_usuarios ru on ru.id_rol = u.id_rol`;
-  const [result] = await pool.query(sqlQuery);
-  res.json(result);
+  try {
+    const [result] = await pool.query(sqlQuery);
+    res.json(result);
+  } catch (error) {
+    res.json({ message: error });
+  }
 };
 
 export const getOneUser = async (req, res) => {
@@ -23,7 +27,7 @@ export const getOneUser = async (req, res) => {
     const [rows] = await pool.query(sqlQuery, [nombre_usuario]);
     if (rows.length <= 0)
       return res.status(404).json({
-        message: `No se ha encontrado un usuario con el nombre ${nombre_usuario}`,
+        message: "Usuario no encontrado",
       });
     res.json(rows[0]);
   } catch (error) {
@@ -74,8 +78,8 @@ export const deleteUser = async (req, res) => {
   const sqlQuery = `DELETE FROM usuarios WHERE nombre_usuario = ?`;
   try {
     const [result] = await pool.query(sqlQuery, [nombre_usuario]);
-    if (result.affectedRows < 0)
-      return res.status(404).json({ message: `Empleado no encontrado` });
+    if (result.affectedRows <= 0)
+      return res.status(404).json({ message: `Usuario no encontrado` });
     res.sendStatus(204);
   } catch (error) {
     res.status(500).json({ message: error.message });
