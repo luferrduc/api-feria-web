@@ -80,9 +80,9 @@ export const deleteContrato = async (req, res) => {
 };
 
 export const updateContrato = async (req,res) => {
-    const id_contrato = req.params.numId;
-    const { fecha_inicio, fecha_termino, estado, observaciones, id_tipo_contrato, arch_cont, id_calidad } = req.body;
-    const sqlQuery = `UPDATE contratos SET fecha_inicio = ?, fecha_termino = ?, estado = ?
+    const id_contrato = req.params.conId;
+    const { fecha_inicio, fecha_termino, estado, observaciones, id_tipo_contrato, arch_cont, id_persona } = req.body;
+    const sqlQuery = `UPDATE contratos SET fecha_inicio = ?, fecha_termino = ?, estado = ?,
                       observaciones = ?, id_tipo_contrato = ?, arch_cont = ?, id_persona = ? WHERE id_contrato = ?`;
     try{
         const [result] = await pool.query(sqlQuery,[
