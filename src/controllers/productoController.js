@@ -26,7 +26,7 @@ export const getOneProduct = async (req, res) => {
 };
 
 export const addProduct = async (req, res) => {
-  const { nombre, precio, observaciones, id_calidad, imagen, id_usuario } =
+  const { nombre, precio, observaciones, id_calidad, imagen, id_usuario, fecha_limite, cantidad, saldo } =
     req.body;
 
   try {
@@ -34,7 +34,9 @@ export const addProduct = async (req, res) => {
       nombre === "" ||
       precio === "" ||
       id_calidad === "" ||
-      id_usuario === ""
+      id_usuario === "" ||
+      fecha_limite === "" ||
+      cantidad === ""
     )
       throw new Error(
         "Algunos campos se encuentran vacios, por favor rellenarlos"
@@ -48,6 +50,9 @@ export const addProduct = async (req, res) => {
       observaciones,
       id_calidad,
       imagen,
+      fecha_limite,
+      cantidad,
+      saldo,
       id_usuario,
     });
   } catch (error) {
@@ -70,9 +75,10 @@ export const deleteProduct = async (req, res) => {
 
 export const updateProduct = async (req, res) => {
   const id_producto = req.params.proId;
-  const { nombre, precio, observaciones, id_calidad, imagen } = req.body;
+  const { nombre, precio, observaciones, id_calidad, imagen, saldo, fecha_limite, cantidad } = req.body;
   const sqlQuery = `UPDATE productos SET nombre = ?, precio = ?,
-                      observaciones = ?, id_calidad = ?, imagen = ? WHERE id_producto = ?`;
+                      observaciones = ?, id_calidad = ?, imagen = ?, saldo = ?, fecha_limite = ?, cantidad = ? 
+                                WHERE id_producto = ?`;
   try {
     const [result] = await pool.query(sqlQuery, [
       nombre,
@@ -80,6 +86,9 @@ export const updateProduct = async (req, res) => {
       observaciones,
       id_calidad,
       imagen,
+      saldo,
+      fecha_limite,
+      cantidad,
       id_producto,
     ]);
     if (result.affectedRows === 0)
