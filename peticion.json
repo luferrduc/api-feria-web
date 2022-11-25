@@ -1,0 +1,30 @@
+{
+    "user": {
+        "name": "Luciano",
+        "surname": "Ferrando",
+        "email": "user@email.com",
+        "phone": {
+            "area_code": "11",
+            "number": "4444-4444"
+        },
+        "identification": {
+            "type": "RUN",
+            "number": "18821142-1"
+        },
+        "address": {
+            "street_name": "Almirante Gómez",
+            "street_number": 75,
+            "zip_code": "7800000"
+        }
+    },
+    "productos": [
+        {
+            "id": 1,
+            "title": "Manzanas",
+            "description": "Manzanas de maipo",
+            "currency_id": "CLP",
+            "unit_price": 1200,
+            "quantity": 3
+        }
+    ]
+}
