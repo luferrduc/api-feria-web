@@ -50,6 +50,7 @@ export const createPayment = async (req, res) => {
       pending: "/pending",
       success: "/success",
     },
+    installments: 6
   };
 
   const payment = await axios.post(url, body, {
