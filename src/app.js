@@ -15,6 +15,7 @@ import VentasRoutes from "./routes/ventas.js";
 import TransporteRoutes from "./routes/transportes.js";
 import PeticionRoutes from "./routes/peticion.js";
 import PaymentRoutes from "./routes/payment.js";
+import DetalleSubastaRoutes from './routes/detalleSubasta.js'
 
 
 // Para conectarlo a la base de datos
@@ -49,6 +50,7 @@ app.use("/api/subastas", SubastaRoutes);
 app.use("/api/ventas", VentasRoutes);
 app.use("/api/transportes", TransporteRoutes);
 app.use("/api/peticion", PeticionRoutes);
+app.use("/api/detalle-subasta",DetalleSubastaRoutes)
 app.use("/api/payment", PaymentRoutes);
 // Rutas sin definir
 app.use((req, res, next) => {

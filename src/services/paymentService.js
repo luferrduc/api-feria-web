@@ -46,10 +46,11 @@ export const createPayment = async (req, res) => {
     payer: user,
     items: productos,
     back_urls: {
-      failure: "/failure",
-      pending: "/pending",
-      success: "/success",
+      failure: "failure",
+      pending: "pending",
+      success: "success",
     },
+    installments: 6
   };
 
   const payment = await axios.post(url, body, {
