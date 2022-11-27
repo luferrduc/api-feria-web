@@ -58,8 +58,7 @@ export const addSubasta = async (req, res) => {
       req.body,
     ]);
     res.json({
-      id: rows.insertId,
-      id_subasta,
+      id_subasta: rows.insertId,
       ganador,
       fecha_ter,
       fecha_inicio,
